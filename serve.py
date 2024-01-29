@@ -9,7 +9,7 @@ def stress_cpu():
     # Run stress_cpu.py in a separate process
     process = Popen(["python3", "stress_cpu.py"], stdout=PIPE, stderr=PIPE)
     std_out, std_err = process.communicate()
-    return "CPU stress initiated", 200
+    return {'message': 'CPU stress initiated'}, 200
 
 @app.route("/", methods=["GET"])
 def get_private_ip():
