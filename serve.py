@@ -9,6 +9,9 @@ def stress_cpu():
     # Run stress_cpu.py in a separate process
     process = Popen(["python3", "stress_cpu.py"], stdout=PIPE, stderr=PIPE)
     std_out, std_err = process.communicate()
+    output = stdout.decode('utf-8')
+    error = stderr.decode('utf-8')
+    print(output, error)
     return {'message': 'CPU stress initiated'}, 200
 
 @app.route("/", methods=["GET"])
