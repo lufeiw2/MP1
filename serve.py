@@ -1,5 +1,5 @@
 from flask import Flask
-from subprocess import Popen, DEVNULL
+from subprocess import Popen, PIPE
 import socket
 
 app = Flask(__name__)
@@ -7,7 +7,8 @@ app = Flask(__name__)
 @app.route("/", methods=["POST"])
 def stress_cpu():
     # Run stress_cpu.py in a separate process
-    Popen(["python", "stress_cpu.py"], stdout=DEVNULL, stderr=DEVNULL)
+    process = Popen(["python3", "stress_cpu.py"], stdout=PIPE, stderr=PIPE)
+    std_out, std_err = process.communicate()
     return "CPU stress initiated", 200
 
 @app.route("/", methods=["GET"])
